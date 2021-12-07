@@ -27,7 +27,7 @@ int main() {
 
   int *d = shmat(shmd, 0, 0);
 
-  int file = open("data.txt", O_RDONLY | O_APPEND, 0644);
+  int file = open("data.txt", O_RDWR | O_APPEND, 0644);
   lseek(file, -1 * (*d), SEEK_END);
   char r[2000];
   int val = read(file, r, *d);

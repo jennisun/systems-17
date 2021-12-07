@@ -1,15 +1,16 @@
 all: control user
+
+control: control.o
 	gcc -o control control.o
+
+write: write.o
 	gcc -o user user.o
 
-control: control.c
-	gcc -c control.c
-
-user: user.c
+write.o: user.c
 	gcc -c user.c
 
-clean:
-	rm -rf *.o
+control.o: control.c
+	gcc -c control.c
 
-run:
-	./program
+clean:
+	rm *.o
