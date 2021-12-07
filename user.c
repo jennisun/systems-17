@@ -27,8 +27,8 @@ int main() {
 
   int *d = shmat(shmd, 0, 0);
 
-  int file = open("data.txt", O_RDWR | O_APPEND, 0644);
-  lseek(file, -1 * (*d), SEEK_END);
+  int file = open("data.txt", O_RDONLY, 0644);
+  lseek(file, -(*d), SEEK_END);
   char r[2000];
   int val = read(file, r, *d);
   if (val < 0) {
@@ -38,8 +38,11 @@ int main() {
   r[*d] = '\0';
   printf("Previous line:%s\n", r);
 
+  close(file);
+  file = open("data.txt", O_WRONLY | O_APPEND, 0644);
   printf("Add line: ");
   fgets(r, 2000, stdin);
+  *d = strlen(r);
   lseek(file, 0, SEEK_END);
   val = write(file, r, strlen(r));
   if (val < 0) {
