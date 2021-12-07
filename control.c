@@ -55,10 +55,11 @@ int main(int argc, char const *argv[]) {
       printf("Error: %s\n", strerror(errno));
       return 0;
     }
-    printf("Full story:\n%s\n", r);
+    printf("\nFull story:\n%s\n", r);
+    remove("data.txt");
   }
 
-  else printf("Invalid arguments\nUse create or remove");
+  else printf("Invalid arguments\nUse create or remove\n");
 
   return 0;
 }
