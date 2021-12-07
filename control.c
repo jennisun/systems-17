@@ -19,7 +19,7 @@ int main(int argc, char const *argv[]) {
   if (argc < 2) printf("Not enough arguments\n");
 
   else if (strcmp(argv[1], "create") == 0) {
-    int file = open("data.txt", O_CREAT | O_TRUNC);
+    int file = open("data.txt", O_CREAT | O_TRUNC, 0644);
     if (file < 0) {
       printf("Error: %s\n", strerror(errno));
       return 0;
@@ -40,7 +40,7 @@ int main(int argc, char const *argv[]) {
     semctl(semd, IPC_RMID, 0);
     shmctl(shmd, IPC_RMID, 0);
 
-    int file = open("data.txt", O_RDONLY);
+    int file = open("data.txt", O_RDONLY, 0644);
     if (file < 0) {
       printf("Error: %s\n", strerror(errno));
       return 0;
